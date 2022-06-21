@@ -1,0 +1,71 @@
+body
+{
+    width: 50%;
+    margin: auto;
+}
+
+header
+{
+    background-color: grey;
+}
+
+.header__logo 
+{
+    height: 50%;
+    text-align: left;
+    margin: 20px;
+    padding: 20px;
+    display: flex;
+}
+
+.header__logo__image 
+{
+    width: 200px;
+    height: 150px;
+}
+
+nav
+{
+    margin: 20px;
+    padding: 20px;
+    height: 50%;
+    text-align: right;
+}
+
+.nav__link
+{
+    margin: 20px;
+    padding: 20px;
+    list-style-type: none;
+    display: inline;
+}
+
+
+@media all and (max-width: 1024px)
+{
+    nav
+    {
+        width: auto;
+        text-align: left;
+    }    
+
+    nav ul 
+    { 
+        flex-direction: column;
+    }
+
+    nav li 
+    {
+        padding-left: 4px;
+    }
+
+    nav a
+    {
+        font-size: 1.1em;
+    }
+
+    nav a:hover
+    {
+        border-bottom: 0;
+    }
+}
