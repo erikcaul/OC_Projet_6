@@ -100,12 +100,12 @@ nav
     z-index: 3;
 }
 
-#moveLeft {
+.moveLeft {
     position: absolute;
     left: -50px;
 }
 
-#moveRight {
+.moveRight {
     position: absolute;
     right: -50px;
 } */
