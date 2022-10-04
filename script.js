@@ -32,7 +32,7 @@ async function fetchCategory(category, nbMovies){
         let fetchApiResult = await fetchApi("api/v1/titles/", `genre=${category}&page=${i}`);
         movies.push(...fetchApiResult.results);
     }
-    // enlever les 3 derniers films
+    movies.splice(7,3);
     return movies;    
 }
    
