@@ -26,21 +26,45 @@ let pageNb = "1";
 let filmCounter = 0;
 
 // Fetch with 2 parameters : category + number of films to fetch
-async function fetchCategory(category, nbFilms){
-    let films = [];
-    for(let i=1;films.length < nbFilms; i++) {
-        films.push(...await fetchApi("api/v1/titles/", `genre=${category}&page=${i}`));
+async function fetchCategory(category, nbMovies){
+    let movies = [];
+    for(let i=1;movies.length < nbMovies; i++) {
+        let fetchApiResult = await fetchApi("api/v1/titles/", `genre=${category}&page=${i}`);
+        movies.push(...fetchApiResult.results);
     }
     // enlever les 3 derniers films
-    return films;    
+    return movies;    
 }
    
 // Fetch Best film
-async function fetchBestFilm(){
+async function fetchBestMovie(){
     let bestListFilm = await fetchApi("api/v1/titles/", `sort_by=imdb_score`); 
     return bestListFilm[0];
 }
 
+async function DisplayMovies(category){
+    let movies = await fetchCategory(category,7);
+    for (let i=0; i<movies.length;i++){
+        let image_url = movies[i].image_url;
+        let image = document.createElement("div");
+        document.getElementById(category).appendChild(image);
+        image.innerHTML = `<img src= ${image_url}>`;
+    } 
+
+    console.log(movies);
+    return movies;
+}
+
+DisplayMovies('action');
+
+/*
+let movies = fetchCategory("action", 7);
+for (let i=0; i<movies.length;i++){
+    let image_url = movies[i].image_url;
+    let image = document.createElement("imageMovie");
+    document.getElementsById(category).appendChild(image);
+    image.innerHTML = `<img src= ${image_url}>`;
+}  */
 /* 
 fetchBestFilm().then(film => {
     for (film of film.results) {
@@ -68,7 +92,7 @@ fetchBestFilm().then(film => {
     }  
 })
  */
-fetchCategory("Action/", 7, "1").then(film => {
+/* fetchCategory("Action/", 7, "1").then(film => {
     for (film of film.results) {
         title = film.title;
         image_url = film.image_url;
@@ -97,8 +121,8 @@ fetchCategory("Action/", 7, "1").then(film => {
             break;
         }
     }  
-}) 
-
+})  */
+/* 
 function fetchFilm(genre, page){
     return fetch("http://localhost:8000/api/v1/" + genre + page)
             .then(reponse => {
@@ -118,23 +142,24 @@ for (let i=1;i<2;i++) {
             /* directors = film.directors;
             actors = film.actors;
             writers = film.writers;
-            genres = film.genres; */
+            genres = film.genres;
             let title = document.createElement("title");
             let image = document.createElement("image");
-            /* let testGenre = document.createElement("p");
+            let testGenre = document.createElement("p");
             let testDirection = document.createElement("p");
-            let testActors = document.createElement("p"); */
+            let testActors = document.createElement("p");
             document.getElementById("container").appendChild(title);
             document.getElementById("container").appendChild(image);
-            /* document.getElementById("container").appendChild(testGenre);
+            document.getElementById("container").appendChild(testGenre);
             document.getElementById("container").appendChild(testDirection);
-            document.getElementById("container").appendChild(testActors);*/
+            document.getElementById("container").appendChild(testActors);
             image.innerHTML = `<img src= ${image_url}>`;
             title.innerHTML = "<strong>Titre :</strong> " + filmTitle;
             
-            /* testGenre.innerHTML = `genres : ${genres}`;
+            testGenre.innerHTML = `genres : ${genres}`;
             testDirection.innerHTML = `Direction : ${directors}`;
-            testActors.innerHTML = `Acteurs : ${actors}`; */
+            testActors.innerHTML = `Acteurs : ${actors}`;
         }
     })  
 }
+ */
