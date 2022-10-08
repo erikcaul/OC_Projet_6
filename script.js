@@ -44,6 +44,12 @@ async function displayMovies(category){
 // Display best movie
 async function displayBestMovie(){
     let bestMovie = await fetchBestMovie();
+    // display movieTitle
+    let titleBestMovie = bestMovie.title;
+    let titleBest = document.createElement("div");
+    document.getElementById("bestMovie").appendChild(titleBest);
+    titleBest.innerHTML = titleBestMovie;
+    // display movieImage
     let imageBestMovie = bestMovie.image_url;
     let imageBest = document.createElement("div");
     document.getElementById("bestMovie").appendChild(imageBest);
