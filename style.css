@@ -53,12 +53,16 @@ nav
     display: flex;
     flex-wrap: wrap;
     flex-direction: row; 
+    margin: 50px;
+}
+.wrapper {
+    display:flex;
 }
 
 .carouselBox {
     height: 250px;
     width: 80%;
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: 0;
 }
 
@@ -75,9 +79,8 @@ position: absolute;
  font-size: 6em;
  background: black;
  width: 80px;
- padding: 20px;
+ padding-top: 120px;
  text-align: center;
- z-index: 1;
 }
  
 .moveLeft {

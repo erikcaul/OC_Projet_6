@@ -19,7 +19,6 @@ async function fetchCategory(category, nbMovies){
 async function fetchBestMovie(){
     let bestListFilmResult = await fetchApi("api/v1/titles/", `sort_by=imdb_score`); 
     let bestListMovies = bestListFilmResult.results;
-    console.log(bestListMovies);
     let bestMovie = bestListMovies[0];
     for (let j=0;j<5;j++){
         bestMovie = bestListMovies[j];
@@ -30,9 +29,16 @@ async function fetchBestMovie(){
 }
  
 // Display movies by category
-async function displayMovies(category){
+async function displayMovies(category, startnumber){
+    document.getElementById(category).innerHTML = '';
     let movies = await fetchCategory(category,7);
-    for (let i=0; i<movies.length;i++){
+    let endNumber = 0;
+    if (startnumber == 0) {
+        endNumber = 4;
+    } else {
+        endNumber = 7;
+    }
+    for (let i=startnumber; i<endNumber;i++){
         let image_url = movies[i].image_url;
         let image = document.createElement("article");
         document.getElementById(category).appendChild(image);
@@ -57,8 +63,18 @@ async function displayBestMovie(){
     return bestMovie;
 }
 
-displayBestMovie();
-displayMovies('action');
-displayMovies('Sci-Fi');
-displayMovies('Thriller');
+// Move caroussel 
+function next(category){
+/*     document.getElementsByClassName('moveRight')[0].visibility = 'hidden';
+ */    
+    displayMovies(category, 4);
+}
 
+function preview(category){
+    displayMovies(category, 0);
+}
+
+displayBestMovie();
+displayMovies('action', 0);
+displayMovies('Sci-Fi', 0);
+displayMovies('Thriller', 0);
