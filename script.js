@@ -34,7 +34,7 @@ async function displayMovies(category){
     let movies = await fetchCategory(category,7);
     for (let i=0; i<movies.length;i++){
         let image_url = movies[i].image_url;
-        let image = document.createElement("div");
+        let image = document.createElement("article");
         document.getElementById(category).appendChild(image);
         image.innerHTML = `<img src= ${image_url}>`;
     } 
@@ -59,3 +59,6 @@ async function displayBestMovie(){
 
 displayBestMovie();
 displayMovies('action');
+displayMovies('Sci-Fi');
+displayMovies('Thriller');
+
