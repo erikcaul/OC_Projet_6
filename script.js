@@ -41,20 +41,23 @@ async function displayMovies(category, startnumber){
     for (let i=startnumber; i<endNumber;i++){
         let image_url = movies[i].image_url;
         let image = document.createElement("article");
-        let button = document.createElement("button");
+        /* let button = document.createElement("button");
         button.type = "button";
-        button.className += "myBtn";
+        button.className += "myBtn";*/
         let movieId = movies[i].id;
-        let movieTitle = movies[i].title;
-        button.id = movieId;
-        button.title = movieTitle;
-        document.getElementById(category).appendChild(button).appendChild(image);
+        /*let movieTitle = movies[i].title;
+        /* button.id = movieId;
+        button.title = movieTitle; */
+        document.getElementById(category).appendChild(image);
+        image.onclick = function() {
+            openModal(movies[i]);
+        }
         image.innerHTML = `<img src= ${image_url}>`;
     } 
     return movies;
 }
 
-// Display best movie
+// Display best movie (mettre appel openModal comme pour autres)
 async function displayBestMovie(){
     let bestMovie = await fetchBestMovie();
     // display movieTitle
@@ -77,14 +80,14 @@ async function displayBestMovie(){
     return bestMovie;
 }
 
-// Display Modal content
-async function displayModalContent(id){
-    let modalInfo = await fetchApi("api/v1/titles/", `id=${id}`);
+// Display Modal content (mettre des balises html dans la modal + css pour une meilleure mise forme)
+function displayModalContent(movie){
+    let modalInfo = movie;
     // display movieImage
     let modalMovieImage = modalInfo.image_url;
-    let movieImage = document.createElement("div");
+    let movieImage = document.createElement("img");
     document.getElementById("modal-content").appendChild(movieImage);
-    movieImage.innerText = modalMovieImage;
+    movieImage.src = modalMovieImage;
     // display movieTitle
     let modalMovieTitle = modalInfo.title;
     let movieTitle = document.createElement("div");
@@ -147,6 +150,19 @@ window.onclick = function(event) {
   }
 }
 
+
+// Open Modal
+function openModal(movie) {
+    initModalContent();
+    displayModalContent(movie);
+    modal.style.display = "block";
+    
+}
+
+// init modal content (récuprer chaque élément de la modal et les mettre en innerHTML = "")
+function initModalContent(){
+    document.getElementById("modal-content").innerHTML = "";
+}
 
 displayBestMovie();
 displayMovies('action', 0);
