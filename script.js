@@ -82,11 +82,7 @@ function displayModalContent(movie){
     let modalInfo = movie;
     // display movieImage
     let modalMovieImage = modalInfo.image_url;
-    // let movieImage = document.createElement("img");
     document.getElementById("movieImage").src = modalMovieImage;
-    // movieImage.src = modalMovieImage;
-    // movieImage.innerHTML = `<img src= ${modalMovieImage}>`
-    // display movieTitle
     let modalMovieTitle = modalInfo.title;
     // let movieTitle = document.createElement("div");
     let movieTitle = document.getElementById("title");
