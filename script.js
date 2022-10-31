@@ -78,8 +78,11 @@ async function displayBestMovie(){
 }
 
 // Display Modal content (mettre des balises html dans la modal + css pour une meilleure mise forme)
-function displayModalContent(movie){
-    let modalInfo = movie;
+async function displayModalContent(movie){
+    /* let modalInfo = movie;
+     */
+    let movieId = movie.id;
+    let modalInfo = await fetchApi(`api/v1/titles/${movieId}`); 
     // display movieImage
     let modalMovieImage = modalInfo.image_url;
     document.getElementById("movieImage").src = modalMovieImage;
@@ -124,7 +127,7 @@ function displayModalContent(movie){
     movieCountries.innerText = 'Origin countries: ' + modalMovieCountries;
 
     // display worldwide gross income
-    let modalMovieWorldwideCrossIncome = modalInfo.worldwide_gross_income;
+    let modalMovieWorldwideCrossIncome = modalInfo.worldwide_gross_income  || "Not defined";
     let movieWorldwideCrossIncome =  document.getElementById("worldwide_cross_income");
     movieWorldwideCrossIncome.innerText = 'Woldwide Cross Income: ' + modalMovieWorldwideCrossIncome;
 
@@ -176,9 +179,9 @@ window.onclick = function(event) {
 
 
 // Open Modal
-function openModal(movie) {
+async function openModal(movie) {
     initModalContent();
-    displayModalContent(movie);
+    await displayModalContent(movie);
     modal.style.display = "block";
     
 }
