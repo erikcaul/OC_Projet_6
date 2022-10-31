@@ -7,6 +7,7 @@ body
 {
     width: 80%;
     margin: auto;
+    padding: auto;
     color: white;
 }
 
@@ -57,6 +58,27 @@ nav
 }
 .wrapper {
     display:flex;
+    margin: auto;
+    border: 3px solid rgb(173, 16, 11);
+}
+
+/* #bestMovie {
+    border: 3px solid rgb(173, 16, 11);
+}
+ */
+.best {
+    margin: auto;
+    padding: 50px;
+}
+
+#bestPicture {
+    flex-shrink: 2;
+    padding: 20px;
+    width: 300px;
+}
+#bestTitleAndButton {
+    margin: 20px;
+    padding: 20px;
 }
 
 .carouselBox {
@@ -103,7 +125,7 @@ position: absolute;
     left: 0;
     top: 0;
     width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    height: 550px; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -133,6 +155,7 @@ position: absolute;
     text-decoration: none;
     cursor: pointer;
   }
+
 
 @media all and (max-width: 1024px)
 {

@@ -55,21 +55,21 @@ async function displayBestMovie(){
     let bestMovie = await fetchBestMovie();
     // display movieTitle
     let titleBestMovie = bestMovie.title;
-    let titleBest = document.createElement("div");
+    let titleBest = document.createElement("h2");
     let button = document.createElement("button");
     button.type = "button";
     button.className += "myBtn";
-    document.getElementById("bestMovie").appendChild(button);
+    document.getElementById("bestTitleAndButton").appendChild(titleBest);
+    titleBest.innerHTML = titleBestMovie;
+    document.getElementById("bestTitleAndButton").appendChild(button);
     button.onclick = function() {
         openModal(bestMovie);
     }
     button.innerText = "Play";
-    document.getElementById("bestMovie").appendChild(titleBest);
-    titleBest.innerHTML = titleBestMovie;
     // display movieImage
     let imageBestMovie = bestMovie.image_url;
     let imageBest = document.createElement("div");
-    document.getElementById("bestMovie").appendChild(imageBest);
+    document.getElementById("bestPicture").appendChild(imageBest);
     imageBest.onclick = function() {
         openModal(bestMovie);
     }
