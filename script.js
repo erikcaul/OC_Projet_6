@@ -108,7 +108,7 @@ async function displayModalContent(movie){
     
     // display directors
     let modalMovieDirectors = modalInfo.directors;
-    let movieDirectors =  document.getElementById("imdb_scoring");
+    let movieDirectors =  document.getElementById("directors");
     movieDirectors.innerText = 'Directors: ' + modalMovieDirectors;
     
     // display actors list

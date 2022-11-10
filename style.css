@@ -54,7 +54,8 @@ nav
     display: flex;
     flex-wrap: wrap;
     flex-direction: row; 
-    margin: 50px;
+    justify-content: space-between;
+    margin: auto;
 }
 .wrapper {
     display:flex;
