@@ -22,7 +22,10 @@
             <!-- Modal content -->
             <!-- <div id="modal-content" class="modal-content">**/ -->
             <img id="movieImage" src="#" alt="movie_picture">
+            <span class="close">&times;</span>
             <h2 id="title"></h2>
+            <div id="description"></div>
+            <div id="genres"></div> 
             <div id="year"></div>
             <div id="rated"></div>
             <div id="imdb_scoring"></div>
@@ -30,9 +33,7 @@
             <div id="actors_list"></div>
             <div id="duration"></div>
             <div id="origin_country"></div>
-            <div id="worldwide_cross_income"></div>
-            <div id="description"></div>                
-            <span class="close">&times;</span>
+            <div id="worldwide_cross_income"></div>               
             </div>
         </div>
         <h1 class="category__tittle">Meilleur film</h1>
@@ -43,6 +44,20 @@
             </section>
         </section>
 
+        <h1>Films les mieux notés</h1>
+        <section class="wrapper">
+            <button type="button" class="moveLeft btn-nav" onclick="preview('action')">
+                <
+            </button>
+            
+            <section id="bestRated" class="carouselBox">
+                    
+            </section>
+            <button type="button" class="moveRight btn-nav" onclick="next('action')">
+                >
+            </button>
+        </section>
+        
         <h1>Films d'action</h1>
         <section class="wrapper">
             <button type="button" class="moveLeft btn-nav" onclick="preview('action')">

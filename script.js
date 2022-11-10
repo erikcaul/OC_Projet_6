@@ -8,7 +8,7 @@ async function fetchApi(path, query){
 async function fetchCategory(category, nbMovies){
     let movies = [];
     for(let i=1;movies.length < nbMovies; i++) {
-        let fetchApiResult = await fetchApi("api/v1/titles/", `genre=${category}&page=${i}`);
+        let fetchApiResult = await fetchApi("api/v1/titles/", `genre=${category}&page=${i}&sort_by=-imdb_score`);
         movies.push(...fetchApiResult.results);
     }
     movies.splice(7,3);
@@ -17,7 +17,7 @@ async function fetchCategory(category, nbMovies){
    
 // Fetch Best film
 async function fetchBestMovie(){
-    let bestListFilmResult = await fetchApi("api/v1/titles/", `sort_by=imdb_score`); 
+    let bestListFilmResult = await fetchApi("api/v1/titles/", `sort_by=-imdb_score`); 
     let bestListMovies = bestListFilmResult.results;
     let bestMovie = bestListMovies[0];
     for (let j=0;j<5;j++){
@@ -86,26 +86,22 @@ async function displayModalContent(movie){
     document.getElementById("movieImage").src = modalMovieImage;
     // display movieTitle
     let modalMovieTitle = modalInfo.title;
-    // let infoText = "Title: ";
-    let infoTextHTML = document.createElement("div");
-    infoTextHTML.id = "titleText" 
-    document.getElementById("title").appendChild(infoTextHTML);
-    let movieInfoText = document.getElementById(titleText);
-    movieInfoText.innerText = "Title: "; 
     // let movieTitle = document.createElement("div");
-    let movieTitle = document.getElementById("title");
-    //movieTitle.innerHTML = movieInfoText + modalMovieTitle;
+    document.getElementById("title").innerHTML = `${modalMovieTitle}`;
+
+    let modalMovieGenre = modalInfo.genres.join(", ");
+    document.getElementById("genres").innerHTML = `<b>Genres: </b> ${modalMovieGenre}`;
 
     // display date year
     let modalMovieYear = modalInfo.year;
     // let movieYear = document.createElement("div");
-    let movieYear = document.getElementById("year");
-    movieYear.innerText = 'Year: ' + modalMovieYear;
+    document.getElementById("year").innerHTML = `<b>Year: </b> ${modalMovieYear}`;
+    
 
     // display rated
     let modalMovieRated = modalInfo.rated;
-    let movieRated = document.getElementById("rated");
-    movieRated.innerText = 'Rated: ' + modalMovieRated;
+    document.getElementById("rated").innerHTML = `<b>Rated: </b> ${modalMovieRated}`;
+
     
     // display imdb scoring
     let modalMovieImdbScoring = modalInfo.imdb_score;
@@ -113,19 +109,19 @@ async function displayModalContent(movie){
     movieImdbScoring.innerText = 'imdb Scoring: ' + modalMovieImdbScoring;
     
     // display directors
-    let modalMovieDirectors = modalInfo.directors;
+    let modalMovieDirectors = modalInfo.directors.join(", ");
     let movieDirectors =  document.getElementById("directors");
     movieDirectors.innerText = 'Directors: ' + modalMovieDirectors;
     
     // display actors list
-    let modalMovieActors = modalInfo.actors;
+    let modalMovieActors = modalInfo.actors.join(", ");
     let movieActors =  document.getElementById("actors_list");
     movieActors.innerText = 'Actors: ' + modalMovieActors;
     
     // display duration
     let modalMovieDuration = modalInfo.duration;
     let movieDuration =  document.getElementById("duration");
-    movieDuration.innerText = 'Duration: ' + modalMovieDuration;
+    movieDuration.innerText = 'Duration: ' + modalMovieDuration + ' minutes';
 
     // display origin country
     let modalMovieCountries = modalInfo.countries;
