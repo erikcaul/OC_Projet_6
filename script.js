@@ -79,17 +79,23 @@ async function displayBestMovie(){
 
 // Display Modal content (mettre des balises html dans la modal + css pour une meilleure mise forme)
 async function displayModalContent(movie){
-    /* let modalInfo = movie;
-     */
     let movieId = movie.id;
     let modalInfo = await fetchApi(`api/v1/titles/${movieId}`); 
     // display movieImage
     let modalMovieImage = modalInfo.image_url;
     document.getElementById("movieImage").src = modalMovieImage;
+    // display movieTitle
     let modalMovieTitle = modalInfo.title;
+    // let infoText = "Title: ";
+    let infoTextHTML = document.createElement("div");
+    infoTextHTML.id = "titleText" 
+    document.getElementById("title").appendChild(infoTextHTML);
+    let movieInfoText = document.getElementById(titleText);
+    movieInfoText.innerText = "Title: "; 
     // let movieTitle = document.createElement("div");
     let movieTitle = document.getElementById("title");
-    movieTitle.innerText = 'Title: ' + modalMovieTitle;
+    //movieTitle.innerHTML = movieInfoText + modalMovieTitle;
+
     // display date year
     let modalMovieYear = modalInfo.year;
     // let movieYear = document.createElement("div");
