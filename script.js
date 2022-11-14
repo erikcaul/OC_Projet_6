@@ -1,6 +1,6 @@
 // Fetch API
 async function fetchApi(path, query){
-    let response = await fetch(`http://localhost:8000/${path}?${query}`);
+    let response = await fetch(`http://localhost:8000/${path}?${query || ""}`);
     return await response.json();
 }
 
@@ -27,6 +27,35 @@ async function fetchBestMovie(){
         }
     }
 }
+
+// Fetch best rated movies
+async function fetchBestImdbMovies(){
+    let bestRatedMoviesResult = await fetchApi("api/v1/titles/", `sort_by=-imdb_score`);
+    let bestRatedMoviesList = bestRatedMoviesResult.results;
+    return bestRatedMoviesList;
+}
+
+// Display best rated movies
+async function displayBestRatedMovies(startnumber){
+    document.getElementById("bestRated").innerHTML = '';
+    let moviesBestImdb = await fetchBestImdbMovies();
+    let endNumber = 0;
+    if (startnumber == 0) {
+        endNumber = 4;
+    } else {
+        endNumber = 7;
+    }
+    for (let i=startnumber; i<endNumber;i++){
+        let image_url = moviesBestImdb[i].image_url;
+        let image = document.createElement("article");
+        document.getElementById("bestRated").appendChild(image);
+        image.onclick = function() {
+            openModal(moviesBestImdb[i]);
+        }
+        image.innerHTML = `<img src= ${image_url}>`;
+    } 
+    return moviesBestImdb;
+}
  
 // Display movies by category
 async function displayMovies(category, startnumber){
@@ -46,7 +75,7 @@ async function displayMovies(category, startnumber){
             openModal(movies[i]);
         }
         image.innerHTML = `<img src= ${image_url}>`;
-    } 
+        } 
     return movies;
 }
 
@@ -102,43 +131,45 @@ async function displayModalContent(movie){
     let modalMovieRated = modalInfo.rated;
     document.getElementById("rated").innerHTML = `<b>Rated: </b> ${modalMovieRated}`;
 
-    
     // display imdb scoring
     let modalMovieImdbScoring = modalInfo.imdb_score;
     let movieImdbScoring =  document.getElementById("imdb_scoring");
-    movieImdbScoring.innerText = 'imdb Scoring: ' + modalMovieImdbScoring;
+    movieImdbScoring.innerHTML = `<b>imdb Scoring: </b> ${modalMovieImdbScoring}`;
     
     // display directors
     let modalMovieDirectors = modalInfo.directors.join(", ");
     let movieDirectors =  document.getElementById("directors");
-    movieDirectors.innerText = 'Directors: ' + modalMovieDirectors;
+    movieDirectors.innerHTML = `<b>Directors: </b> ${modalMovieDirectors}`;
     
     // display actors list
     let modalMovieActors = modalInfo.actors.join(", ");
     let movieActors =  document.getElementById("actors_list");
-    movieActors.innerText = 'Actors: ' + modalMovieActors;
+    movieActors.innerHTML = `<b>Actors: </b> ${modalMovieActors}`;
     
     // display duration
     let modalMovieDuration = modalInfo.duration;
     let movieDuration =  document.getElementById("duration");
-    movieDuration.innerText = 'Duration: ' + modalMovieDuration + ' minutes';
+    movieDuration.innerHTML = `<b>Duration: </b> ${modalMovieDuration} minutes`;
 
     // display origin country
     let modalMovieCountries = modalInfo.countries;
     let movieCountries =  document.getElementById("origin_country");
-    movieCountries.innerText = 'Origin countries: ' + modalMovieCountries;
+    movieCountries.innerHTML = `<b>Origin countries: </b> ${modalMovieCountries}`;
 
     // display worldwide gross income
-    let modalMovieWorldwideCrossIncome = modalInfo.worldwide_gross_income  || "Not defined";
-    let movieWorldwideCrossIncome =  document.getElementById("worldwide_cross_income");
-    movieWorldwideCrossIncome.innerText = 'Woldwide Cross Income: ' + modalMovieWorldwideCrossIncome;
+    let modalMovieWorldwideGrossIncome = modalInfo.worldwide_gross_income  || "Not defined";
+    let movieWorldwideGrossIncome =  document.getElementById("worldwide_gross_income");
+    movieWorldwideGrossIncome.innerHTML = `<b>Woldwide Gross Income: </b> ${modalMovieWorldwideGrossIncome} entries`;
 
     // display description
     let modalMovieDescription = modalInfo.description;
     let movieDescription =  document.getElementById("description");
-    movieDescription.innerText = 'Description: ' + modalMovieDescription;
+    movieDescription.innerHTML = `<b>Description: </b>${modalMovieDescription}`;
 
 }
+
+
+
 
 // Move caroussel 
 function next(category){
@@ -199,11 +230,12 @@ function initModalContent(){
     document.getElementById("actors_list").innerHTML = "";
     document.getElementById("duration").innerHTML = "";
     document.getElementById("origin_country").innerHTML = "";
-    document.getElementById("worldwide_cross_income").innerHTML = "";
+    document.getElementById("worldwide_gross_income").innerHTML = "";
     document.getElementById("description").innerHTML = "";
 }
 
 displayBestMovie();
+displayBestRatedMovies(0);
 displayMovies('action', 0);
 displayMovies('Sci-Fi', 0);
 displayMovies('Thriller', 0);
