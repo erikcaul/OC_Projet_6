@@ -3,12 +3,12 @@
     <head>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="style.css" />
-        <script type="text/javascript" src="script.js" defer></script>
+        <script src="script.js" defer></script>
         <title>JustStreamIt</title>
     </head>
     <body class="container">
         <header class="container__flex">
-            <img class="header__logo" src="images/logo_JustStreamIt.png"/>
+            <img class="header__logo" src="images/logo_JustStreamIt.png" alt="logo JustStreamIt"/>
             <nav>
                 <ul class="nav__list">
                     <li class="nav__link nav__link--active">Accueil</li>
@@ -20,10 +20,9 @@
         <!-- The Modal -->
         <div id="myModal" class="modal">
             <!-- Modal content -->
-            <!-- <div id="modal-content" class="modal-content">**/ -->
             <img id="movieImage" src="#" alt="movie_picture">
             <span class="close">&times;</span>
-            <h2 id="title"></h2>
+            <div id="title"> </div>
             <div id="description"></div>
             <div id="genres"></div> 
             <div id="year"></div>
@@ -36,70 +35,67 @@
             <div id="worldwide_gross_income"></div>               
             </div>
         </div>
+
+        <!-- Best Movie -->
         <h1 class="category__tittle">Meilleur film</h1>
-        <section class="wrapper">
+        <div class="wrapper">
             <section id="bestMovie" class="best"> 
                 <div id="bestTitleAndButton"></div>
                 <div id="bestPicture"></div>
             </section>
-        </section>
+        </div>
 
+        <!-- Best Rated Movies -->
         <h1>Films les mieux notés</h1>
-        <section class="wrapper">
-            <button type="button" class="moveLeft btn-nav" onclick="preview('action')">
+        <div class="wrapper">
+            <button type="button" class="moveLeft btn-nav" onclick="previewBestRated()">
                 <
             </button>
-            
-            <section id="bestRated" class="carouselBox">
-                    
-            </section>
-            <button type="button" class="moveRight btn-nav" onclick="next('action')">
+            <div id="bestRated" class="carouselBox">
+            </div>
+            <button type="button" class="moveRight btn-nav" onclick="nextBestRated()">
                 >
             </button>
-        </section>
+        </div>
         
+        <!-- Action category Movies -->
         <h1>Films d'action</h1>
-        <section class="wrapper">
+        <div class="wrapper">
             <button type="button" class="moveLeft btn-nav" onclick="preview('action')">
                 <
-            </button>
-            
-            <section id="action" class="carouselBox">
-                    
-            </section>
+            </button>   
+            <div id="action" class="carouselBox">
+            </div>
             <button type="button" class="moveRight btn-nav" onclick="next('action')">
                 >
             </button>
-        </section>
+        </div>
         
+        <!-- Sci-Fi category Movies -->
         <h1>Films de Sci-fi</h1>
-        <section class="wrapper">
+        <div class="wrapper">
             <button type="button" class="moveLeft btn-nav" onclick="preview('Sci-Fi')">
                 <
             </button>
-            
-            <section id="Sci-Fi" class="carouselBox">
-                    
-            </section>
+            <div id="Sci-Fi" class="carouselBox">
+            </div>
             <button type="button" class="moveRight btn-nav" onclick="next('Sci-Fi')">
                 >
             </button>
-        </section>
+        </div>
 
+        <!-- Thrillers category Movies -->
         <h1>Thrillers</h1>
-        <section class="wrapper">
+        <div class="wrapper">
             <button type="button" class="moveLeft btn-nav" onclick="preview('Thriller')">
                 <
-            </button>
-            
-            <section id="Thriller" class="carouselBox">
-                    
-            </section>
+            </button>    
+            <div id="Thriller" class="carouselBox">
+            </div>
             <button type="button" class="moveRight btn-nav" onclick="next('Thriller')">
                 >
             </button>
-        </section>
-        
+        </div>
         
     </body>
 </html>
