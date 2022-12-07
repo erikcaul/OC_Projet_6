@@ -32,7 +32,7 @@ async function fetchBestMovie(){
 async function fetchBestImdbMovies(nbMovies){
     let bestRatedMoviesList = [];
     for(let i=1;bestRatedMoviesList.length < nbMovies; i++) {
-        let bestRatedMoviesResult = await fetchApi("api/v1/titles/", `sort_by=-imdb_score`);
+        let bestRatedMoviesResult = await fetchApi("api/v1/titles/", `page=${i}&sort_by=-imdb_score`);
         bestRatedMoviesList.push(...bestRatedMoviesResult.results);
     }
     bestRatedMoviesList.splice(7,3);
